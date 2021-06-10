@@ -19,8 +19,10 @@ texture = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="Sicht" type="Area2D" parent="."]
+collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sicht"]
 position = Vector2( 121.622, 3.53555 )
 shape = SubResource( 2 )
+
 [connection signal="body_entered" from="Sicht" to="." method="_on_Sicht_body_entered"]

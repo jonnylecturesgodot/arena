@@ -10,22 +10,52 @@ public class Kämpfer : KinematicBody2D
     [Export]
     private int geschwindigkeit = 10;
 
-    public int Leben { get; set; }
+    [Export]
+    public int Leben { get; set; } = 100;
+
+    Vector2 velocity = new Vector2();
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        
+        ((Label)GetTree().Root.GetNode("./Main/CanvasLayer/Label")).Text = Leben.ToString();
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
   public override void _Process(float delta)
   {
-      MoveAndSlide(new Vector2(1 * geschwindigkeit, 0));
+      if (Input.IsActionPressed("ui_down"))
+      {
+        velocity.y = 1;
+      }
+      if (Input.IsActionPressed("ui_up"))
+      {
+        velocity.y = -1;
+      }
+      if (Input.IsActionPressed("ui_right"))
+      {
+        velocity.x = 1;
+      }
+      if (Input.IsActionPressed("ui_left"))
+      {
+        velocity.x = -1;
+      }
+      MoveAndSlide(velocity * geschwindigkeit);
+      ((Label)GetTree().Root.GetNode("./Main/CanvasLayer/Label")).Text = Leben.ToString();
   }
 
   public void _on_Sicht_body_entered(Node kollidierterBody)
   {
      Vector2 ziel = ((Node2D)kollidierterBody).Position;
   }
+
+  public void Hit()
+  {
+    Leben -= 1;
+  }
+  public void Hit(bool crit)
+  {
+    Leben -= 5;
+  }
+
 }

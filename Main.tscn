@@ -1,8 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Main.cs" type="Script" id=1]
 [ext_resource path="res://background_tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://Kämpfer.tscn" type="PackedScene" id=3]
+[ext_resource path="res://QickDuck.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Plant.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Stein.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32.2664, 317.979 )
@@ -28,20 +31,57 @@ tile_data = PoolIntArray( -393226, 1, 917528, -393225, 1, 917528, -458743, 1, 91
 position = Vector2( 192.434, 187.98 )
 geschwindigkeit = 20
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="Mauern" type="StaticBody2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mauern"]
 position = Vector2( 992.071, 318.905 )
 shape = SubResource( 1 )
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="MauerOben" type="CollisionShape2D" parent="Mauern"]
 position = Vector2( 510.531, 31.1127 )
 shape = SubResource( 2 )
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Mauern"]
 position = Vector2( 31.1127, 318.198 )
 shape = SubResource( 3 )
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Mauern"]
 position = Vector2( 509.824, 606.698 )
 shape = SubResource( 4 )
+
+[node name="QickDuck" parent="." instance=ExtResource( 4 )]
+position = Vector2( 908.554, 491.539 )
+
+[node name="Plant" parent="." instance=ExtResource( 5 )]
+visible = false
+anzahl = 3
+
+[node name="Stein" parent="." instance=ExtResource( 6 )]
+visible = false
+anzahl = 5
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+margin_left = 887.595
+margin_top = -2.52641
+margin_right = 911.595
+margin_bottom = 11.4736
+rect_scale = Vector2( 5, 5 )
+text = "0"
+align = 3
+valign = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="CanvasLayer"]
+margin_left = 713.0
+margin_top = 2.0
+margin_right = 855.0
+margin_bottom = 55.0
+rect_scale = Vector2( 4, 4 )
+text = "Leben:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
